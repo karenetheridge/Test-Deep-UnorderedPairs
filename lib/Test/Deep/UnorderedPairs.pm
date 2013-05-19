@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Test::Deep::UnorderedPairs;
-# ABSTRACT: ...
+# ABSTRACT: A Test::Deep plugin for comparing lists as if they were hashes
 
 use parent 'Test::Deep::Cmp';
 use Exporter 'import';
@@ -51,20 +51,64 @@ __END__
 
 =head1 SYNOPSIS
 
-...
+    use Test::More;
+    use Test::Deep;
+    use Test::Deep::UnorderedPairs;
+
+    cmp_deeply(
+        {
+            inventory => [
+                pear => 6,
+                peach => 5,
+                apple => 1,
+            ],
+        },
+        {
+            inventory => unordered_pairs(
+                apple => 1,
+                peach => ignore,
+                pear => 6,
+            ),
+        },
+        'got the right inventory',
+    );
 
 =head1 DESCRIPTION
 
+This module provides the sub C<unordered_pairs> (and C<tuples>, as a synonym)
+to indicate the data being tested is a list of pairs that should be tested
+where the order of the pairs is insignificant.  This would be equivalent to
+testing the list is as if it were a hash.
+
+This is useful when testing a function that returns a list of hash elements as
+an arrayref, not a hashref.  One such application might be testing L<PSGI>
+headers, which are passed around as an arrayref:
+
+    cmp_deeply(
+        $response,
+        [
+            '200',
+            unordered_pairs(
+                'Content-Type' => 'text/plain',
+                'Content-Length' => '12',
+            ],
+            [ 'hello world!' ],
+        ],
+        'check headers as an arrayref of unordered pairs',
+    );
 
 =head1 FUNCTIONS/METHODS
 
 =begin :list
 
-* C<foo>
+* unordered_pairs
+Pass an (even-numbered) list of items to test
+
+* tuples
+C<tuples> is an alias for C<unordered_pairs>.  I'm open to more names as well;
+I'm not quite yet sure what the best nomenclature should be.
 
 =end :list
-
-...
 
 =head1 SUPPORT
 
@@ -76,10 +120,11 @@ I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 
 =head1 ACKNOWLEDGEMENTS
 
-...
+Ricardo Signes, for maintaining L<Test::Deep> and for being the first consumer
+of this module, in L<Router::Dumb>.
 
 =head1 SEE ALSO
 
-...
+L<Test::Deep>
 
 =cut
