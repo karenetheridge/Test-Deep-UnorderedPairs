@@ -76,10 +76,10 @@ __END__
 
 =head1 DESCRIPTION
 
-This module provides the sub C<unordered_pairs> (and C<tuples>, as a synonym)
+This module provides the sub C<unordered_pairs>
+(and C<tuples>, C<samehash>, as synonyms)
 to indicate the data being tested is a list of pairs that should be tested
-where the order of the pairs is insignificant.  This would be equivalent to
-testing the list is as if it were a hash.
+where the order of the pairs is insignificant.
 
 This is useful when testing a function that returns a list of hash elements as
 an arrayref, not a hashref.  One such application might be testing L<PSGI>
