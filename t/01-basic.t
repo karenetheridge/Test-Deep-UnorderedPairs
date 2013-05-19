@@ -57,7 +57,6 @@ my @tests = (
     },
 );
 
-# XXX switch to pairwise.
 while (my ($test_name, $test) = (shift(@tests), shift(@tests)))
 {
     last if not $test_name;
