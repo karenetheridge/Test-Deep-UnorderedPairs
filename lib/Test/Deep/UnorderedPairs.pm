@@ -99,16 +99,24 @@ headers, which are passed around as an arrayref:
 
 =head1 FUNCTIONS/METHODS
 
-=begin :list
+=for stopwords tuples
 
-* unordered_pairs
+=for Pod::Coverage
+init
+descend
+
+=over
+
+=item * C<unordered_pairs>
+
 Pass an (even-numbered) list of items to test
 
-* tuples
+=item * C<tuples>
+
 C<tuples> is an alias for C<unordered_pairs>.  I'm open to more names as well;
 I'm not quite yet sure what the best nomenclature should be.
 
-=end :list
+=back
 
 =head1 SUPPORT
 
