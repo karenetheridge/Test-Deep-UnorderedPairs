@@ -85,6 +85,16 @@ This is useful when testing a function that returns a list of hash elements as
 an arrayref, not a hashref.  One such application might be testing L<PSGI>
 headers, which are passed around as an arrayref:
 
+    my $response = [
+        '200',
+        [
+            'Content-Length' => '12',
+            'Content-Type' => 'text/plain',
+        ],
+        [ 'hello world!' ],
+    ];
+
+    # this test passes
     cmp_deeply(
         $response,
         [
