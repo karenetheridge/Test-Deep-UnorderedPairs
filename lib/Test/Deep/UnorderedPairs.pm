@@ -9,13 +9,14 @@ use Carp 'confess';
 use Test::Deep::Hash;
 
 # I'm not sure what name is best; decide later
-our @EXPORT = qw(tuples unordered_pairs);
+our @EXPORT = qw(tuples unordered_pairs samehash);
 
 sub tuples
 {
     return __PACKAGE__->new(@_);
 }
 sub unordered_pairs { goto &tuples }
+sub samehash { goto &tuples }
 
 sub init
 {
@@ -111,9 +112,9 @@ descend
 
 Pass an (even-numbered) list of items to test
 
-=item * C<tuples>
+=item * C<tuples>, C<samehash>
 
-C<tuples> is an alias for C<unordered_pairs>.  I'm open to more names as well;
+C<tuples> and C<samehash> are aliases for C<unordered_pairs>.  I'm open to more names as well;
 I'm not quite yet sure what the best nomenclature should be.
 
 =back
