@@ -4,7 +4,7 @@ Test::Deep::UnorderedPairs - A Test::Deep plugin for comparing lists as if they 
 
 # VERSION
 
-version 0.001
+version 0.002
 
 # SYNOPSIS
 
@@ -32,15 +32,25 @@ version 0.001
 
 # DESCRIPTION
 
-This module provides the sub `unordered_pairs` (and `tuples`, as a synonym)
+This module provides the sub `unordered_pairs`
+(and `tuples`, `samehash`, as synonyms)
 to indicate the data being tested is a list of pairs that should be tested
-where the order of the pairs is insignificant.  This would be equivalent to
-testing the list is as if it were a hash.
+where the order of the pairs is insignificant.
 
 This is useful when testing a function that returns a list of hash elements as
 an arrayref, not a hashref.  One such application might be testing [PSGI](http://search.cpan.org/perldoc?PSGI)
 headers, which are passed around as an arrayref:
 
+    my $response = [
+        '200',
+        [
+            'Content-Length' => '12',
+            'Content-Type' => 'text/plain',
+        ],
+        [ 'hello world!' ],
+    ];
+
+    # this test passes
     cmp_deeply(
         $response,
         [

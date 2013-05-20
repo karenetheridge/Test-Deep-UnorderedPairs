@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.002     2013-05-20 08:54:13 PDT-0700 (Karen Etheridge)
           - fix tests that would not run on perls pre-5.9.5 because
             re::is_regexp was not available
 
