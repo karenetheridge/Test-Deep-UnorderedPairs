@@ -22,6 +22,12 @@ my @tests = (
         ok => 0,
         diag => qr/^Compared reftype\(\$data\)\n\s+got : 'HASH'\nexpect : 'ARRAY'\n$/,
     },
+    'array has an odd length' => {
+        got => [ 'foo' ],
+        exp => tuples(foo => 1),
+        ok => 0,
+        diag => qr/^Compared array length of \$data\n\s+got : array with 1 element\(s\)\nexpect : array with 2 element\(s\)\n$/,
+    },
     'key does not match' => {
         got => [ foo => 2 ],
         exp => tuples(bar => 2),

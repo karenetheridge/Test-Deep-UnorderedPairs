@@ -7,6 +7,7 @@ use parent 'Test::Deep::Cmp';
 use Exporter 'import';
 use Carp 'confess';
 use Test::Deep::Hash;
+use Test::Deep::ArrayLength;
 
 # I'm not sure what name is best; decide later
 our @EXPORT = qw(tuples unordered_pairs samehash);
@@ -25,19 +26,19 @@ sub init
     confess 'tuples must have an even number of elements'
         if @vals % 2;
 
-    $self->{val_as_hash} = Test::Deep::Hash->new({ @vals });
+    $self->{val} = \@vals;
 }
 
 sub descend
 {
     my ($self, $got) = @_;
 
-    return 0 unless $self->test_reftype($got, 'ARRAY');
+    my $exp = $self->{val};
+
+    return 0 unless Test::Deep::ArrayLength->new(@$exp + 0)->descend($got);
 
     # simply compare as a hashref
-    my $exp = $self->{val_as_hash};
-
-    if ($exp->descend( { @$got } ))
+    if (Test::Deep::Hash->new({ @{$self->{val}} })->descend( { @$got } ))
     {
         $Test::Deep::Stack->pop;
         return 1;
