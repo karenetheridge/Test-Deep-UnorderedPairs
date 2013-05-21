@@ -4,8 +4,10 @@ use warnings FATAL => 'all';
 use Test::More;
 use Test::Warnings;
 use Test::Fatal;
-use Test::Deep qw(cmp_details deep_diag);
 use Test::Deep::UnorderedPairs;
+
+use lib 't/lib';
+use Util;
 
 like(
     exception { tuples(1) },
@@ -60,30 +62,8 @@ while (my ($test_name, $test) = (shift(@tests), shift(@tests)))
 {
     last if not $test_name;
 
-    subtest $test_name => sub {
-        my ($ok, $stack) = cmp_details(@{$test}{qw(got exp)});
-
-        ok( !($ok xor $test->{ok}), 'test ' . ($test->{ok} ? 'passed' : 'failed'));
-        return if not Test::Builder->new->is_passing;
-
-        if (not $ok)
-        {
-            my $diag = deep_diag($stack);
-            if (__is_regexp($test->{diag}))
-            {
-                like($diag, $test->{diag}, 'failure diagnostics');
-            }
-            else
-            {
-                is($diag, $test->{diag}, 'failure diagnostics');
-            }
-        }
-    };
-}
-
-sub __is_regexp
-{
-    re->can('is_regexp') ? re::is_regexp(shift) : ref(shift) eq 'Regexp';
+    subtest $test_name => test_plugin(@{$test}{qw(got exp ok diag)});
+    BAIL_OUT('oops') if not Test::Builder->new->is_passing;
 }
 
 done_testing;
