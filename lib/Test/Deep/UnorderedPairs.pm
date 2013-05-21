@@ -37,13 +37,125 @@ sub descend
 
     return 0 unless Test::Deep::ArrayLength->new(@$exp + 0)->descend($got);
 
-    # simply compare as a hashref
-    if (Test::Deep::Hash->new({ @{$self->{val}} })->descend( { @$got } ))
+    # check that all the keys are present -- can test as a bag
+
+    my @exp_keys = _keys_of_list($exp);
+    my @got_keys = _keys_of_list($got);
+
+    return 0 unless Test::Deep::descend(\@got_keys, Test::Deep::UnorderedPairKeys->new(@exp_keys));
+
+    Test::Deep::descend($got, Test::Deep::UnorderedPairElements->new($exp));
+}
+
+sub _keys_of_list
+{
+    my $list = shift;
+
+    my $i = 0;
+    map { $i++ % 2 ? () : $_ } @$list;
+}
+
+
+package Test::Deep::UnorderedPairKeys;
+use parent 'Test::Deep::Set';
+
+sub init
+{
+    # quack like a bag
+    shift->SUPER::init(0, '', @_);
+}
+
+sub diagnostics
+{
+    my ($self, $where, $last) = @_;
+
+    my $error = $last->{diag};
+    my $diag = <<EOM;
+Comparing keys of $where
+$error
+EOM
+
+    return $diag;
+}
+
+
+package Test::Deep::UnorderedPairElements;
+use parent 'Test::Deep::Cmp';
+
+sub init
+{
+    my ($self, $val) = @_;
+    $self->{val} = $val;
+}
+
+# we assume the keys are already verified as identical.
+sub descend
+{
+    my ($self, $got) = @_;
+
+    # make copy, as we are going to modify this one!
+    my @exp = @{$self->{val}};
+    my $data = $self->data;
+
+    GOT_KEY: for (my $got_index = 0; $got_index < @$got; $got_index += 1)
     {
-        $Test::Deep::Stack->pop;
-        return 1;
+        # find the first occurrence of $key in @exp
+        EXP_KEY: for (my $exp_index = 0; $exp_index < @exp; $exp_index += 1)
+        {
+            if (not Test::Deep::eq_deeply_cache($got->[$got_index], $exp[$exp_index]))
+            {
+                # advance to the next key position
+                ++$exp_index;
+                next;
+            }
+
+            # found a matching key in got and exp
+
+            $data->{got_index} = ++$got_index;
+            $data->{exp_value} = $exp[++$exp_index];
+
+            if (Test::Deep::eq_deeply_cache($got->[$got_index], $data->{exp_value}))
+            {
+                # splice this out of the exp list and continue with the next key
+                splice(@exp, $exp_index - 1, 2);
+                next GOT_KEY;
+            }
+
+            # values do not match - keep looking for another match unless there are no more!
+        }
+
+        # got to the end of exp_keys, but still no matches found
+        return 0;
     }
+
+    # exhausted all got_keys. if everything matched, @exp would be empty
+    return @exp ? 0 : 1;
+}
+
+sub render_stack
+{
+    my ($self, $var, $data) = @_;
+    $var .= "->" unless $Test::Deep::Stack->incArrow;
+    $var .= '[' . $data->{got_index} . ']';
+
+    return $var;
+}
+
+sub reset_arrow
+{
     return 0;
+}
+
+sub renderGot
+{
+    my ($self, $got) = @_;
+    return $self->SUPER::renderGot($got->[$self->data->{got_index}]);
+}
+
+sub renderExp
+{
+    my $self = shift;
+    return $self->SUPER::renderGot($self->data->{exp_value});
 }
 
 1;

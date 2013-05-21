@@ -4,10 +4,17 @@ use warnings FATAL => 'all';
 use Test::More;
 use Test::Warnings;
 use Test::Fatal;
+use Test::Deep 'cmp_deeply';
 use Test::Deep::UnorderedPairs;
 
 use lib 't/lib';
 use Util;
+
+cmp_deeply(
+    [ Test::Deep::UnorderedPairs::_keys_of_list([ qw(a b c d e f g h) ]) ],
+    [ qw(a c e g) ],
+    '_keys_of_list',
+);
 
 like(
     exception { tuples(1) },
@@ -32,19 +39,19 @@ my @tests = (
         got => [ foo => 2 ],
         exp => tuples(bar => 2),
         ok => 0,
-        diag => "Comparing hash keys of \$data\nMissing: 'bar'\nExtra: 'foo'\n",
+        diag => "Comparing keys of \$data\nMissing: 'bar'\nExtra: 'foo'\n",
     },
     'value does not match' => {
         got => [ foo => 2 ],
         exp => tuples(foo => 1),
         ok => 0,
-        diag => qr/^Compared \$data->{"foo"}\n\s+got : '2'\nexpect : '1'\n$/,
+        diag => qr/^Compared \$data->\[1\]\n\s+got : '2'\nexpect : '1'\n$/,
     },
     'one of the values does not match' => {
         got => [ bar => 2, foo => 2 ],
         exp => tuples(foo => 1, bar => 2),
         ok => 0,
-        diag => qr/^Compared \$data->{"foo"}\n\s+got : '2'\nexpect : '1'\n$/,
+        diag => qr/^Compared \$data->\[3\]\n\s+got : '2'\nexpect : '1'\n$/,
     },
     'single tuple match' => {
         got => [ foo => 1 ],
