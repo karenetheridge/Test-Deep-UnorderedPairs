@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Test::Deep::UnorderedPairs;
-# ABSTRACT: A Test::Deep plugin for comparing lists as if they were hashes
+# ABSTRACT: A Test::Deep plugin for comparing an unordered list of tuples
 
 use parent 'Test::Deep::Cmp';
 use Exporter 'import';
@@ -239,6 +239,9 @@ Pass an (even-numbered) list of items to test
 
 C<tuples> and C<samehash> are aliases for C<unordered_pairs>.  I'm open to more names as well;
 I'm not quite yet sure what the best nomenclature should be.
+
+(Be aware that "C<samehash>" is a bit of a misnomer, since if a key is
+repeated, the comparison is B<not> equivalent to comparing as a hash.)
 
 =back
 
