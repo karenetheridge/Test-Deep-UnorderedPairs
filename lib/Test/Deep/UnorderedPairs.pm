@@ -14,18 +14,26 @@ our @EXPORT = qw(tuples unordered_pairs samehash);
 
 sub tuples
 {
-    return __PACKAGE__->new(@_);
+    return __PACKAGE__->new('tuples', @_);
 }
-sub unordered_pairs { goto &tuples }
-sub samehash { goto &tuples }
+sub unordered_pairs
+{
+    return __PACKAGE__->new('unordered_pairs', @_);
+}
+sub samehash
+{
+    return __PACKAGE__->new('samehash', @_);
+}
 
 sub init
 {
-    my ($self, @vals) = @_;
+    my ($self, $name, @vals) = @_;
 
-    confess 'tuples must have an even number of elements'
+    $name ||= 'tuples';
+    confess $name . ' must have an even number of elements'
         if @vals % 2;
 
+    $self->{name} = $name;  # use in later diagnostic messages?
     $self->{val} = \@vals;
 }
 
