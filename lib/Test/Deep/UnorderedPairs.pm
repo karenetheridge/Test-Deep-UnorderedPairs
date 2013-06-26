@@ -268,6 +268,10 @@ of this module, in L<Router::Dumb>.
 
 =head1 SEE ALSO
 
-L<Test::Deep>
+=begin :list
+
+* L<Test::Deep>
+
+=end :list
 
 =cut
