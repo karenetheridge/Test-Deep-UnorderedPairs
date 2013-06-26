@@ -76,7 +76,9 @@ while (my ($test_name, $test) = (shift(@tests), shift(@tests)))
     last if not $test_name;
 
     subtest $test_name => test_plugin(@{$test}{qw(got exp ok diag)});
-    BAIL_OUT('oops') if not Test::Builder->new->is_passing;
+
+    # for author testing only
+    BAIL_OUT('oops') if -e '.git' and not Test::Builder->new->is_passing;
 }
 
 done_testing;
