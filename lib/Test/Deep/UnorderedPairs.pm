@@ -270,10 +270,7 @@ of this module, in L<Router::Dumb>.
 
 =head1 SEE ALSO
 
-=begin :list
-
+=for :list
 * L<Test::Deep>
-
-=end :list
 
 =cut
