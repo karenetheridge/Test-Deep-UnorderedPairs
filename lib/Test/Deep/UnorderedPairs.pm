@@ -263,6 +263,8 @@ I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 
 =head1 ACKNOWLEDGEMENTS
 
+=for stopwords Signes
+
 Ricardo Signes, for maintaining L<Test::Deep> and for being the first consumer
 of this module, in L<Router::Dumb>.
 
