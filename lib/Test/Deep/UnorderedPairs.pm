@@ -5,7 +5,7 @@ package Test::Deep::UnorderedPairs;
 
 use parent 'Test::Deep::Cmp';
 use Exporter 'import';
-use Carp 'confess';
+use Carp ();
 use Test::Deep::Hash;
 use Test::Deep::ArrayLength;
 
@@ -30,7 +30,7 @@ sub init
     my ($self, $name, @vals) = @_;
 
     $name ||= 'tuples';
-    confess $name . ' must have an even number of elements'
+    Carp::confess $name . ' must have an even number of elements'
         if @vals % 2;
 
     $self->{name} = $name;  # use in later diagnostic messages?
