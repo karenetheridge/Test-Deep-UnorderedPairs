@@ -1,5 +1,7 @@
 Revision history for Test-Deep=UnorderedPairs
 
+{{$NEXT}}
+
 0.005     2015-06-07 01:21:53Z
           - fix PAUSE indexing issue due to missing $VERSIONs in supplementary
             packages

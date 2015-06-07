@@ -5,7 +5,7 @@ package Test::Deep::UnorderedPairs;
 # KEYWORDS: testing tests plugin hash list tuples pairs unordered
 # vim: set ts=8 sts=4 sw=4 tw=78 et :
 
-our $VERSION = '0.005';
+our $VERSION = '0.006';
 
 use parent 'Test::Deep::Cmp';
 use Exporter 'import';
@@ -71,7 +71,7 @@ sub _keys_of_list
 package Test::Deep::UnorderedPairKeys;
 use parent 'Test::Deep::Set';
 
-our $VERSION = '0.005';
+our $VERSION = '0.006';
 
 sub init
 {
@@ -96,7 +96,7 @@ EOM
 package Test::Deep::UnorderedPairElements;
 use parent 'Test::Deep::Cmp';
 
-our $VERSION = '0.005';
+our $VERSION = '0.006';
 
 sub init
 {
