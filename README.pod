@@ -8,7 +8,7 @@ Test::Deep::UnorderedPairs - A Test::Deep plugin for comparing an unordered list
 
 =head1 VERSION
 
-version 0.004
+version 0.005
 
 =head1 SYNOPSIS
 
