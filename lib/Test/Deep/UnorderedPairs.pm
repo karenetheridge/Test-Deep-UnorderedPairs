@@ -233,7 +233,7 @@ headers, which are passed around as an arrayref:
         'check headers as an arrayref of unordered pairs',
     );
 
-=head1 FUNCTIONS/METHODS
+=head1 FUNCTIONS
 
 =for stopwords tuples
 
@@ -241,21 +241,17 @@ headers, which are passed around as an arrayref:
 init
 descend
 
-=over
-
-=item * C<unordered_pairs>
+=head2 C<unordered_pairs>
 
 Pass an (even-numbered) list of items to test
 
-=item * C<tuples>, C<samehash>
+=head2 C<tuples>, C<samehash>
 
 C<tuples> and C<samehash> are aliases for C<unordered_pairs>.  I'm open to more names as well;
 I'm not quite yet sure what the best nomenclature should be.
 
 (Be aware that "C<samehash>" is a bit of a misnomer, since if a key is
 repeated, the comparison is B<not> equivalent to comparing as a hash.)
-
-=back
 
 =head1 SUPPORT
 
