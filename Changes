@@ -1,4 +1,4 @@
-Revision history for {{$dist->name}}
+Revision history for Test-Deep=UnorderedPairs
 
 {{$NEXT}}
           - diagnostic messages are fixed so they include the name of the sub
