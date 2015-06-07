@@ -71,6 +71,8 @@ sub _keys_of_list
 package Test::Deep::UnorderedPairKeys;
 use parent 'Test::Deep::Set';
 
+our $VERSION = '0.005';
+
 sub init
 {
     # quack like a bag
@@ -93,6 +95,8 @@ EOM
 
 package Test::Deep::UnorderedPairElements;
 use parent 'Test::Deep::Cmp';
+
+our $VERSION = '0.005';
 
 sub init
 {
