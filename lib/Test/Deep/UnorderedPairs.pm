@@ -2,6 +2,7 @@ use strict;
 use warnings;
 package Test::Deep::UnorderedPairs;
 # ABSTRACT: A Test::Deep plugin for comparing an unordered list of tuples
+# KEYWORDS: testing tests plugin hash list tuples pairs unordered
 
 use parent 'Test::Deep::Cmp';
 use Exporter 'import';
