@@ -1,12 +1,16 @@
-# NAME
+=pod
 
-Test::Deep::UnorderedPairs - A Test::Deep plugin for comparing lists as if they were hashes
+=encoding UTF-8
 
-# VERSION
+=head1 NAME
 
-version 0.003
+Test::Deep::UnorderedPairs - A Test::Deep plugin for comparing an unordered list of tuples
 
-# SYNOPSIS
+=head1 VERSION
+
+version 0.004
+
+=head1 SYNOPSIS
 
     use Test::More;
     use Test::Deep;
@@ -30,15 +34,15 @@ version 0.003
         'got the right inventory',
     );
 
-# DESCRIPTION
+=head1 DESCRIPTION
 
-This module provides the sub `unordered_pairs`
-(and `tuples`, `samehash`, as synonyms)
+This module provides the sub C<unordered_pairs>
+(and C<tuples>, C<samehash>, as synonyms)
 to indicate the data being tested is a list of pairs that should be tested
 where the order of the pairs is insignificant.
 
 This is useful when testing a function that returns a list of hash elements as
-an arrayref, not a hashref.  One such application might be testing [PSGI](http://search.cpan.org/perldoc?PSGI)
+an arrayref, not a hashref.  One such application might be testing L<PSGI>
 headers, which are passed around as an arrayref:
 
     my $response = [
@@ -64,39 +68,59 @@ headers, which are passed around as an arrayref:
         'check headers as an arrayref of unordered pairs',
     );
 
-# FUNCTIONS/METHODS
+=head1 FUNCTIONS
 
-- `unordered_pairs`
+=for stopwords tuples
 
-    Pass an (even-numbered) list of items to test
+=for Pod::Coverage init
+descend
 
-- `tuples`, `samehash`
+=head2 C<unordered_pairs>
 
-    `tuples` and `samehash` are aliases for `unordered_pairs`.  I'm open to more names as well;
-    I'm not quite yet sure what the best nomenclature should be.
+Pass an (even-numbered) list of items to test
 
-# SUPPORT
+=head2 C<tuples>, C<samehash>
 
-Bugs may be submitted through [the RT bug tracker](https://rt.cpan.org/Public/Dist/Display.html?Name=Test-Deep-UnorderedPairs)
-(or [bug-Test-Deep-UnorderedPairs@rt.cpan.org](mailto:bug-Test-Deep-UnorderedPairs@rt.cpan.org)).
-I am also usually active on irc, as 'ether' at `irc.perl.org`.
+C<tuples> and C<samehash> are aliases for C<unordered_pairs>.  I'm open to more names as well;
+I'm not quite yet sure what the best nomenclature should be.
 
-# ACKNOWLEDGEMENTS
+(Be aware that "C<samehash>" is a bit of a misnomer, since if a key is
+repeated, the comparison is B<not> equivalent to comparing as a hash.)
 
-Ricardo Signes, for maintaining [Test::Deep](http://search.cpan.org/perldoc?Test::Deep) and for being the first consumer
-of this module, in [Router::Dumb](http://search.cpan.org/perldoc?Router::Dumb).
+=head1 SUPPORT
 
-# SEE ALSO
+=for stopwords irc
 
-[Test::Deep](http://search.cpan.org/perldoc?Test::Deep)
+Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Test-Deep-UnorderedPairs>
+(or L<bug-Test-Deep-UnorderedPairs@rt.cpan.org|mailto:bug-Test-Deep-UnorderedPairs@rt.cpan.org>).
+I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 
-# AUTHOR
+=head1 ACKNOWLEDGEMENTS
+
+=for stopwords Signes
+
+Ricardo Signes, for maintaining L<Test::Deep> and for being the first consumer
+of this module, in L<Router::Dumb>.
+
+=head1 SEE ALSO
+
+=over 4
+
+=item *
+
+L<Test::Deep>
+
+=back
+
+=head1 AUTHOR
 
 Karen Etheridge <ether@cpan.org>
 
-# COPYRIGHT AND LICENSE
+=head1 COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2013 by Karen Etheridge.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
+=cut
