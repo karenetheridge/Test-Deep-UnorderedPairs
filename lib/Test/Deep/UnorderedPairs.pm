@@ -8,7 +8,7 @@ package Test::Deep::UnorderedPairs;
 our $VERSION = '0.006';
 
 use parent 'Test::Deep::Cmp';
-use Exporter 'import';
+use Exporter 5.57 'import';
 use Carp ();
 use Test::Deep::Hash;
 use Test::Deep::ArrayLength;
