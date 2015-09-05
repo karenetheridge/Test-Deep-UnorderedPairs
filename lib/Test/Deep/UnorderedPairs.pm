@@ -259,14 +259,6 @@ I'm not quite yet sure what the best nomenclature should be.
 (Be aware that "C<samehash>" is a bit of a misnomer, since if a key is
 repeated, the comparison is B<not> equivalent to comparing as a hash.)
 
-=head1 SUPPORT
-
-=for stopwords irc
-
-Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Test-Deep-UnorderedPairs>
-(or L<bug-Test-Deep-UnorderedPairs@rt.cpan.org|mailto:bug-Test-Deep-UnorderedPairs@rt.cpan.org>).
-I am also usually active on irc, as 'ether' at C<irc.perl.org>.
-
 =head1 ACKNOWLEDGEMENTS
 
 =for stopwords Signes
