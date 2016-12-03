@@ -1,9 +1,9 @@
 use strict;
 use warnings;
 package Test::Deep::UnorderedPairs;
+# vim: set ts=8 sts=4 sw=4 tw=115 et :
 # ABSTRACT: A Test::Deep plugin for comparing an unordered list of tuples
 # KEYWORDS: testing tests plugin hash list tuples pairs unordered
-# vim: set ts=8 sts=4 sw=4 tw=115 et :
 
 our $VERSION = '0.006';
 
