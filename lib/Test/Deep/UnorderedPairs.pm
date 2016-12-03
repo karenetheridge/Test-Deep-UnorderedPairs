@@ -7,26 +7,33 @@ package Test::Deep::UnorderedPairs;
 
 our $VERSION = '0.006';
 
-use parent 'Test::Deep::Cmp';
 use Exporter 5.57 'import';
-use Carp ();
-use Test::Deep::ArrayLength;
 
 # I'm not sure what name is best; decide later
 our @EXPORT = qw(tuples unordered_pairs samehash);
 
 sub tuples
 {
-    return __PACKAGE__->new('tuples', @_);
+    return Test::Deep::UnorderedPairs::Object->new('tuples', @_);
 }
 sub unordered_pairs
 {
-    return __PACKAGE__->new('unordered_pairs', @_);
+    return Test::Deep::UnorderedPairs::Object->new('unordered_pairs', @_);
 }
 sub samehash
 {
-    return __PACKAGE__->new('samehash', @_);
+    return Test::Deep::UnorderedPairs::Object->new('samehash', @_);
 }
+
+
+package # hide from PAUSE
+    Test::Deep::UnorderedPairs::Object;
+use parent 'Test::Deep::Cmp';
+
+our $VERSION = '0.006';
+
+use Carp ();
+use Test::Deep::ArrayLength;
 
 sub init
 {

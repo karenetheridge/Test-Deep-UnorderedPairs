@@ -11,7 +11,7 @@ use lib 't/lib';
 use Util;
 
 cmp_deeply(
-    [ Test::Deep::UnorderedPairs::_keys_of_list([ qw(a b c d e f g h) ]) ],
+    [ Test::Deep::UnorderedPairs::Object::_keys_of_list([ qw(a b c d e f g h) ]) ],
     [ qw(a c e g) ],
     '_keys_of_list',
 );
