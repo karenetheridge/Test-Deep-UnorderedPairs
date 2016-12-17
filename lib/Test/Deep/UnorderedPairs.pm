@@ -5,7 +5,7 @@ package Test::Deep::UnorderedPairs;
 # ABSTRACT: A Test::Deep plugin for comparing an unordered list of tuples
 # KEYWORDS: testing tests plugin hash list tuples pairs unordered
 
-our $VERSION = '0.006';
+our $VERSION = '0.007';
 
 use Exporter 5.57 'import';
 
@@ -30,7 +30,7 @@ package # hide from PAUSE
     Test::Deep::UnorderedPairs::Object;
 use parent 'Test::Deep::Cmp';
 
-our $VERSION = '0.006';
+our $VERSION = '0.007';
 
 use Carp ();
 use Test::Deep::ArrayLength;
@@ -78,7 +78,7 @@ package # hide from PAUSE
     Test::Deep::UnorderedPairKeys;
 use parent 'Test::Deep::Set';
 
-our $VERSION = '0.006';
+our $VERSION = '0.007';
 
 sub init
 {
@@ -104,7 +104,7 @@ package # hide from PAUSE
     Test::Deep::UnorderedPairElements;
 use parent 'Test::Deep::Cmp';
 
-our $VERSION = '0.006';
+our $VERSION = '0.007';
 
 sub init
 {
