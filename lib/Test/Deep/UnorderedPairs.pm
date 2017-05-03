@@ -269,7 +269,7 @@ repeated, the comparison is B<not> equivalent to comparing as a hash.)
 
 =for stopwords Signes
 
-Ricardo Signes, for maintaining L<Test::Deep> and for being the first consumer
+Thanks to Ricardo Signes, for maintaining L<Test::Deep> and for being the first consumer
 of this module, in L<Router::Dumb>.
 
 =head1 SEE ALSO
