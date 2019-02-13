@@ -70,7 +70,7 @@ sub _keys_of_list
     my $list = shift;
 
     my $i = 0;
-    map { $i++ % 2 ? () : $_ } @$list;
+    map $i++ % 2 ? () : $_, @$list;
 }
 
 
